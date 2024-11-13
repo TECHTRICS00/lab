@@ -1,0 +1,16 @@
+int led = 13;
+int LDR = 12;
+
+void setup() {
+  pinMode(led, OUTPUT);
+  pinMode(LDR, INPUT);
+}
+
+void loop() {
+  int c = analogRead(LDR);  // Read the state of the button (pin 12)
+  if (c>2) {           // Check if the button is pressed
+    digitalWrite(led, HIGH); // Turn on the LED
+  } else {
+    digitalWrite(led, LOW);  // Turn off the LED
+  }
+}
