@@ -1,0 +1,40 @@
+const int adcPin = A0;
+const int ledPin = 7;
+const int buzzerPin = 5;
+
+const float R1 = 1000000.0;
+const float R2 = 100000.0;
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(ledPin, OUTPUT);
+  pinMode(buzzerPin, OUTPUT);
+}
+
+void loop() {
+  int adcValue = analogRead(adcPin);
+  float Vout = (adcValue * 5.0) / 1023.0;
+  float Vin = Vout * ((R1 + R2) / R2);
+
+  Serial.print("Input Voltage: ");
+  Serial.println(Vin);
+
+  if (Vin < 3.0) {
+    digitalWrite(ledPin, HIGH);
+    delay(500);
+    digitalWrite(ledPin, LOW);
+    delay(500);
+  } 
+  else if (Vin > 9.0) {
+    digitalWrite(buzzerPin, HIGH);
+    delay(1000);
+    digitalWrite(buzzerPin, LOW);
+    delay(1000);
+  } 
+  else {
+    digitalWrite(ledPin, LOW);
+    digitalWrite(buzzerPin, LOW);
+  }
+
+  delay(500);
+}
