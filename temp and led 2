@@ -1,0 +1,41 @@
+int temp=A0;
+int led1=7;
+int led2=6;
+void setup()
+{
+  pinMode(temp,INPUT);
+  pinMode(led1,OUTPUT);
+  pinMode(led2,OUTPUT);
+  Serial.begin(9600);
+}
+void loop()
+{
+  int T=analogRead(temp);
+  Serial.println(T);
+  Serial.println("HERE IS THE 1ST");
+  if(T>80)
+  {
+    Serial.println("LED1 IS ON");
+    digitalWrite(led1,HIGH);
+    
+ }
+  
+  else
+  {
+   Serial.println("LED1 IS off");
+    digitalWrite(led1,LOW); 
+  }
+  if(T<80){
+    
+    Serial.println("LED2 IS ON");
+    digitalWrite(led2,HIGH);
+    
+ }
+  
+  else
+  {
+   Serial.println("LED2 IS off");
+    digitalWrite(led2,LOW); 
+  }
+    
+}
