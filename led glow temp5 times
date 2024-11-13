@@ -1,0 +1,34 @@
+const int tempSensorPin = A0;
+const int ledPin = 7;
+int lastTemp = 0;
+int repeatCount = 0;
+
+void setup() {
+  pinMode(ledPin, OUTPUT);
+  Serial.begin(9600); 
+}
+
+void loop() {
+  int tempValue = analogRead(tempSensorPin);
+
+  Serial.print("Temperature Value: ");
+  Serial.println(tempValue);
+
+  if (tempValue == lastTemp) {
+    repeatCount++;
+  } else {
+    repeatCount = 0;
+  }
+
+  lastTemp = tempValue;
+
+  if (repeatCount >= 5) {
+    digitalWrite(ledPin, HIGH);
+    Serial.println("LED ON");
+  } else {
+    digitalWrite(ledPin, LOW);
+    Serial.println("LED OFF");
+  }
+
+  delay(500);
+}
