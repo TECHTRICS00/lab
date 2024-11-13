@@ -1,0 +1,26 @@
+const int tempPin = A0;
+const int buzzerPin = 8;
+const float thresholdTemp = 5.0;
+
+void setup() {
+    Serial.begin(9600);
+    pinMode(buzzerPin, OUTPUT);
+}
+
+void loop() {
+    float temperature = analogRead(tempPin);
+    temperature = (temperature * 5.0 * 100.0) / 1024.0;
+
+    Serial.print("Temperature: ");
+    Serial.println(temperature);
+
+    if (temperature < thresholdTemp) {
+        digitalWrite(buzzerPin, HIGH);
+        Serial.println("Buzzer ON! Room temperature is below threshold.");
+    } else {
+        digitalWrite(buzzerPin, LOW);
+        Serial.println("Buzzer OFF! Room temperature is above threshold.");
+    }
+
+    delay(1000);
+}
